@@ -6,6 +6,7 @@ import Sider from './Sider'
 
 const Layout = ({children}) => {
   const path = useLocation().pathname;
+ 
 
   return (
     <div>

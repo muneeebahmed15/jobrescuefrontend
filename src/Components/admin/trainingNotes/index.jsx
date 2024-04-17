@@ -6,12 +6,12 @@ import BreadCrumbs from '../../../UI/BreadCrumbs'
 const TrainingNotes = () => {
   const path = useLocation().pathname;
   return (
-    <Layout>
+    <>
 
       <BreadCrumbs path={path}/>
 
       Training Notes
-    </Layout>
+    </>
   )
 }
 

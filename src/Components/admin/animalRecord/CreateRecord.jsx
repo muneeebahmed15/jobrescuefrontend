@@ -438,7 +438,7 @@ const CreateRecord = () => {
   ];
 
   return (
-    <Layout>
+    <>
       <div className='mx-4'>
         
         <Steps current={current}>
@@ -474,7 +474,7 @@ const CreateRecord = () => {
           </Form>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ const RecordDetail = () => {
     const record = data.find(item => item.id === id);
 
     return (
-        <Layout>
+        <>
             <Link to={'/admin/animal-records'} >
                 <Button type='primary' className='mb-5' size='large' icon={<LeftOutlined />}>Back</Button>
             </Link>
@@ -72,7 +72,7 @@ const RecordDetail = () => {
                     </div>
                 </div>
             )}
-        </Layout>
+        </>
     );
 };
 

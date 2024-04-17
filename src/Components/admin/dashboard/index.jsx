@@ -4,9 +4,9 @@ import Layout from '../../layout'
 const Dashboard
  = () => {
   return (
-    <Layout>
+    <>
       Dashboard
-    </Layout>
+    </>
   )
 }
 

@@ -7,7 +7,7 @@ import { LeftOutlined } from '@ant-design/icons'
 
 const AddEmployee = () => {
   return (
-    <Layout>
+    <>
         
          <Link to={'/admin/employees'} >
                 <Button type='primary' className='mb-5' size='large' icon={<LeftOutlined />}>Back</Button>
@@ -44,7 +44,7 @@ const AddEmployee = () => {
 
           </Card>
 
-    </Layout>
+    </>
   )
 }
 

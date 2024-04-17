@@ -28,7 +28,7 @@ const AnimalRecord = () => {
   }
 
   return (
-    <Layout>
+    <>
 
       <BreadCrumbs path={path} />
 
@@ -82,7 +82,7 @@ const AnimalRecord = () => {
       ))}
 
     </div>
-    </Layout>
+    </>
   )
 }
 

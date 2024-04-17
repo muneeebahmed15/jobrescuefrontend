@@ -3,9 +3,9 @@ import Layout from '../../layout'
 
 const Setting = () => {
   return (
-    <Layout>
+    <>
       setting
-    </Layout>
+    </>
   )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './Components/login'
-import Layout from './Components/layout'
 import Dashboard from './Components/admin/dashboard'
 import AnimalRecord from './Components/admin/animalRecord'
 import TrainingNotes from './Components/admin/trainingNotes'
@@ -11,6 +10,7 @@ import LandingPage from './Components/landingPage'
 import CreateRecord from './Components/admin/animalRecord/CreateRecord'
 import RecordDetail from './Components/admin/animalRecord/RecordDetail'
 import AddEmployee from './Components/admin/employees/AddEmployee'
+import Admin from './Components/admin'
 
 const App = () => {
   return (
@@ -22,6 +22,8 @@ const App = () => {
             <Route path='/' element={<LandingPage/>}/>
 
             <Route path='/login' element={<Login/>}/>
+
+            <Route path='/admin' element={<Admin/>}>
 
             <Route path='/admin/dashboard' element={<Dashboard/>}/>
 
@@ -39,6 +41,8 @@ const App = () => {
 
             <Route path='/admin/settings' element={<Setting/>}/>
 
+            </Route>
+
 
             <Route path='*' element={"Page not found"}/>
     </Routes>
@@ -49,3 +53,5 @@ const App = () => {
 }
 
 export default App
+
+
