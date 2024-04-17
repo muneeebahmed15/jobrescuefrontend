@@ -50,7 +50,7 @@ export const CurrentUser = () =>{
         try {
             const res = await axios.get("current-user");
            
-            setData(res.data)
+            console.log(res.data)
         } catch (error) {
             console.log(error);
         }finally{
@@ -65,4 +65,29 @@ export const CurrentUser = () =>{
     },[AuthToken])
 
     return {currentuser, data, loading}
+}
+
+export const RegisterStaff = () => {
+    const [data, setData] = useState({role: "", addedBy:"", email: "", password: "", gender:"", name: "", DOB: ""});
+    const [loading, setLoading] = useState(false);
+
+    const changeHandler = (e) =>{
+        setData({...data, [e.target.name]: e.target.value})
+    }
+
+    const register = async() =>{
+        setLoading(true);
+        try {
+            const res = await axios.post("/register", data);
+           
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    return { register, data, loading, changeHandler }
 }
