@@ -77,7 +77,7 @@ export const RegisterStaff = () => {
     const register = async() =>{
         setLoading(true);
         try {
-            const res = await axios.post("/register", data);
+            const res = await axios.post("/register-user", data);
             console.log(res);
            if(res.status === 200){
             toast.success("Staff added successfully")
