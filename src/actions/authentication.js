@@ -104,7 +104,7 @@ export const GetUsers = () =>{
     try {
         const res = await axios.get("get-users");
         console.log(res);
-        setData(res.data);
+        setUser(res.data);
     } catch (error) {
         console.log(error);
     }finally{
@@ -118,6 +118,6 @@ export const GetUsers = () =>{
     }
    },[AuthToken])
 
-   return {data}
+   return {user}
 
 }

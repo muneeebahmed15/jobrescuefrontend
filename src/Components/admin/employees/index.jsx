@@ -5,7 +5,7 @@ import {PlusOutlined, UserOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
-// import { data } from '../../data';
+import { data } from '../../data';
 import { GetUsers } from '../../../actions/authentication';
 
 
@@ -13,9 +13,9 @@ import { GetUsers } from '../../../actions/authentication';
 const AnimalRecord = () => {
   const path = useLocation().pathname;
   const [searchData, setSearchData] = useState(data);
-  const {data} = GetUsers();
+  const {user} = GetUsers();
 
-  console.log(data);
+  console.log(user);
 
   const handleSearchChange = (e) =>{
     const value = e.target.value;
