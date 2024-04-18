@@ -107,6 +107,8 @@ export const GetUsers = () =>{
         setData(res.data);
     } catch (error) {
         console.log(error);
+    }finally{
+        setLoading(false)
     }
    }
 
