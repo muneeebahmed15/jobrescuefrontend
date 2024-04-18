@@ -45,6 +45,7 @@ const AnimalRecord = () => {
     <hr />
 
     <div>
+      {JSON.stringify(user)}
 
     <div className='my-3' style={{maxWidth: "300px", minWidth: "180px"}}>
     <Input size="large" placeholder="Search..." onChange={handleSearchChange}/>
