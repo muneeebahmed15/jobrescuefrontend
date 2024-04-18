@@ -12,19 +12,9 @@ const AddEmployee = () => {
   const {auth} = _AuthContext();
 
   const user = auth.rest
-  // console.log(user._id);
 
   data.role = "employee";
   data.addedBy = user._id;
-
-  const submit = () =>{
-    register()
-    if(register){
-      message.success("Employee Added");
-    }else{
-      message.error("Failed to add");
-    }
-  }
 
   return (
     <>
@@ -68,7 +58,7 @@ const AddEmployee = () => {
             </div>
 
               <div>
-            <Button className='mt-2' style={{float: "right"}} size='large' type='primary' onClick={submit}>
+            <Button className='mt-2' style={{float: "right"}} size='large' type='primary' onClick={register}>
              {loading ? "loading..." : "Add Employee"}
               </Button>
             </div>

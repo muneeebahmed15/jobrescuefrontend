@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { _AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-
+import toast from 'react-hot-toast'
 
 
 export const UserLogin = () => {
@@ -25,6 +25,7 @@ export const UserLogin = () => {
                 setAuth(res.data)
                 router("/admin/dashboard")
                 Cookies.set("auth",JSON.stringify(res.data))
+                toast.success("Login Successful")
             }
         } catch (error) {
             console.log(error);
@@ -77,9 +78,10 @@ export const RegisterStaff = () => {
         setLoading(true);
         try {
             const res = await axios.post("/register", data);
-           
             console.log(res);
-
+           if(res.status === 200){
+            toast.success("Staff added successfully")
+           }
         } catch (error) {
             console.log(error);
         }finally{

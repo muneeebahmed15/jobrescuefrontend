@@ -21,16 +21,6 @@ const CreateRecord = () => {
   };
 
 
-  const onFinish = () => {
-    addrecord();
-    if(addrecord){
-    message.success('Form submitted successfully!');
-  }
-    else{
-      message.error('Failed to add data');
-    }
-  };
-
   const steps = [
     {
       title: 'Section 1',
@@ -463,7 +453,7 @@ const CreateRecord = () => {
           <Form
             name="animalForm"
             initialValues={{ remember: true }}
-            onFinish={onFinish}
+            onFinish={addrecord}
           >
             {steps[current].content}
             <div style={{ marginTop: 24 }}>
