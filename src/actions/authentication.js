@@ -78,11 +78,11 @@ export const RegisterStaff = () => {
         setLoading(true);
         try {
             const res = await axios.post("/register-user", data);
-            console.log(res);
            if(res.status === 200){
             toast.success("Staff added successfully")
            }
         } catch (error) {
+            if(error.response.status === 400){toast.error("Email already exists")}
             console.log(error);
         }finally{
             setLoading(false);
