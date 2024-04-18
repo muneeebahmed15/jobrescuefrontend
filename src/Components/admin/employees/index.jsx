@@ -13,7 +13,7 @@ import { GetUsers } from '../../../actions/authentication';
 const AnimalRecord = () => {
   const path = useLocation().pathname;
   const [searchData, setSearchData] = useState(data);
-  const {user} = GetUsers();
+  const {user, getusers} = GetUsers();
 
   console.log(user);
 

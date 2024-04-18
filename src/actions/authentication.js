@@ -118,6 +118,6 @@ export const GetUsers = () =>{
     }
    },[getusers, AuthToken])
 
-   return {user}
+   return {getusers}
 
 }
