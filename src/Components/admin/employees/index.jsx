@@ -5,7 +5,7 @@ import {PlusOutlined, UserOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
-import { data } from '../../data';
+// import { data } from '../../data';
 import { GetUsers } from '../../../actions/authentication';
 
 
