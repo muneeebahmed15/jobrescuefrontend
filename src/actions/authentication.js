@@ -91,3 +91,31 @@ export const RegisterStaff = () => {
 
     return { register, data, loading, changeHandler }
 }
+
+export const GetUsers = () =>{
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const {auth} = _AuthContext();
+    const AuthToken = auth && auth?.token;
+
+
+   const getusers = async() =>{
+    setLoading(true);
+    try {
+        const res = await axios.get("get-users");
+        console.log(res);
+        setData(res.data);
+    } catch (error) {
+        console.log(error);
+    }
+   }
+
+   useEffect(()=>{
+    if(AuthToken){
+        getusers()
+    }
+   },[AuthToken])
+
+   return {data}
+
+}

@@ -6,13 +6,17 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
 import { data } from '../../data';
+import { GetUsers } from '../../../actions/authentication';
 
 
 
 const AnimalRecord = () => {
   const path = useLocation().pathname;
   const [searchData, setSearchData] = useState(data);
+  const {getusers} = GetUsers();
 
+  console.log(getusers);
+  
   const handleSearchChange = (e) =>{
     const value = e.target.value;
     console.log(value);
