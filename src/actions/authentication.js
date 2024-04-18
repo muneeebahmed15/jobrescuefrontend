@@ -49,8 +49,6 @@ export const CurrentUser = () =>{
         setLoading(true);
         try {
             const res = await axios.get("current-user");
-           
-            console.log(res.data)
         } catch (error) {
             console.log(error);
         }finally{
