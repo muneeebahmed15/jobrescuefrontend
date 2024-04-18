@@ -116,7 +116,7 @@ export const GetUsers = () =>{
     if(AuthToken){
         getusers()
     }
-   },[AuthToken])
+   },[getusers, AuthToken])
 
    return {user}
 
