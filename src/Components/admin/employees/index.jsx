@@ -99,7 +99,8 @@ console.log(searchData);
       ))}
 
       
-{!users || users.length === 0 && <h3>No Staff Register</h3>}
+{loading && (!users || users.length === 0) && <h3>No Staff Register</h3>}
+
 
     </div> 
     </>
