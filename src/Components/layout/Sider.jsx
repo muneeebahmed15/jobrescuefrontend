@@ -12,8 +12,8 @@ const Sider = ({path}) => {
 
     <div className='d-flex justify-content-center'>
       <ul className='mt-5' style={{paddingLeft: "0"}}>
-        {admin.map((x)=>(
-        <Link to={x.link} style={{textDecoration: 'none', color: "black"}}>
+        {admin.map((x, index)=>(
+        <Link to={x.link} key={index} style={{textDecoration: 'none', color: "black"}}>
           <li className={x.margin} style={{listStyle: "none", color: path === x.link ? "blue" : ""}}>
             {x.title}
             </li>

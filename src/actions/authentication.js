@@ -50,6 +50,7 @@ export const CurrentUser = () =>{
         setLoading(true);
         try {
             const res = await axios.get("current-user");
+            // console.log(res);
         } catch (error) {
             console.log(error);
         }finally{
@@ -67,7 +68,7 @@ export const CurrentUser = () =>{
 }
 
 export const RegisterStaff = () => {
-    const [data, setData] = useState({role: "", addedBy:"", email: "", password: "", gender:"", name: "", DOB: ""});
+    const [data, setData] = useState({role: "", email: "", password: "", gender: "", name: "", DOB: ""});
     const [loading, setLoading] = useState(false);
 
     const changeHandler = (e) =>{
@@ -78,6 +79,7 @@ export const RegisterStaff = () => {
         setLoading(true);
         try {
             const res = await axios.post("/register-user", data);
+            console.log(res);
            if(res.status === 200){
             toast.success("Staff added successfully")
            }
@@ -92,32 +94,30 @@ export const RegisterStaff = () => {
     return { register, data, loading, changeHandler }
 }
 
-export const GetUsers = () =>{
-    const [user, setUser] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const {auth} = _AuthContext();
-    const AuthToken = auth && auth?.token;
+export const GetUsers = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { auth } = _AuthContext();
+  const AuthToken = auth?.token;
 
+  useEffect(() => {
+    const getusers = async () => {
+        setLoading(true);
+        try {
+          const {data} = await axios.get("get-users")
+          setUsers(data);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-   const getusers = async() =>{
-    setLoading(true);
-    try {
-        const res = await axios.get("get-users");
-        console.log(res);
-        setUser(res.data);
-    } catch (error) {
-        console.log(error);
-    }finally{
-        setLoading(false)
+    if (AuthToken) {
+      getusers();
     }
-   }
+  }, [AuthToken]);
 
-   useEffect(()=>{
-    if(AuthToken){
-        getusers()
-    }
-   },[getusers, AuthToken])
+  return { users, loading };
+};
 
-   return {getusers}
-
-}

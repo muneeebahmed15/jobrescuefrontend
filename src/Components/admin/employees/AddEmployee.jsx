@@ -4,17 +4,14 @@ import { Link } from 'react-router-dom'
 import { Button, Card, Input, message } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import { RegisterStaff } from '../../../actions/authentication'
-import { _AuthContext } from '../../../actions/AuthContext'
 
 
 const AddEmployee = () => {
   const {data, loading, changeHandler, register} = RegisterStaff();
-  const {auth} = _AuthContext();
 
-  const user = auth.rest
+  console.log(data);
 
   data.role = "employee";
-  data.addedBy = user._id;
 
   return (
     <>
@@ -34,7 +31,7 @@ const AddEmployee = () => {
               <div className="col-md-6 px-2 mt-2">
                 <label className='form-label'>Gender</label>
               <select className='form-select' name='gender' value={data.gender} onChange={changeHandler} size='large' >
-                <option selected>Choose Gender</option>
+                <option defaultValue>Choose Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
