@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -6,13 +6,14 @@ import toast from 'react-hot-toast'
 export const AddRecord = () =>{
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-            arrivalDate:  "",
-            burroSource:  "",
-            camperName:  "",
+            // arrivalDate:  "",
+            animalSource:  "",
+            animalName:  "",
             // camperPhoto: { type: Date },
             camperGender:  "",
             camperAge: "",
             microchip:  "",
+            freezemark: "",
         
         
             //care record
@@ -88,3 +89,31 @@ export const AddRecord = () =>{
 
     return {addrecord, loading, data, handleChange}
 }
+
+// export const AllAnimals = () =>{
+//     // const [data, setData] = useState([]);
+//     // const [loading, setLoading] = useState(false);
+
+//     // const allAnimals = async()=>{
+//     //     setLoading(true);
+//     //     try {
+//     //         const res = await axios.get("get-animals")
+//     //         if(res.status === 200){
+//     //             setData(res.data);
+//     //         }
+//     //     } catch (error) {
+//     //         console.log(error);
+//     //     }finally{
+//     //         setLoading(false);
+//     //     }
+//     // }
+    
+//     // useEffect(() => {
+//     //     const fetchData = async () => {
+//     //         await allAnimals();
+//     //     };
+//     //     fetchData();
+//     // }, []);
+
+//     return {data, loading}
+// }

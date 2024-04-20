@@ -20,12 +20,12 @@ useEffect(()=>{
   setSearchData(users)
 }, [users])
 
-console.log(searchData);
+// console.log(searchData);
   
 
   const handleSearchChange = (e) =>{
     const value = e.target.value;
-    console.log(value);
+    // console.log(value);
 
     const newData = users?.filter((x)=>
   x.name.toLowerCase().includes(value.toLowerCase()) ||
