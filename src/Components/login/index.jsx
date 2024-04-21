@@ -13,6 +13,8 @@ const Login = () => {
 
   const {auth} = _AuthContext();
   const authToken = auth && auth?.token;
+  
+console.log(auth.token);
 
   return authToken ? router("/admin/dashboard") : (
     <div className='d-flex justify-content-center align-items-center ' style={{height: "100vh"}}>
