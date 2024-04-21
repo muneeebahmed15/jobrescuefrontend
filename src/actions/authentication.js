@@ -158,6 +158,60 @@ export const GetUsers = () => {
     }
   }, [AuthToken]);
 
+
   return { users, loading };
 };
+
+export const SingleUser = (id) =>{
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
+    const router = useNavigate()
+
+    const singleUser = async() =>{
+        setLoading(true);
+        try {
+            const res = await axios.get(`single-user/${id}`);
+            const {data} = res;
+            if(res.status === 200){
+                setData(data)
+            }
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    useEffect(()=>{
+        if(id)
+        singleUser();
+    },[id])
+
+    return { loading, data}
+}
+
+
+export const DeleteUser = () =>{
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
+    const router = useNavigate()
+
+    const deleteUser = async(id) =>{
+        setLoading(true);
+        try {
+            const res = await axios.get(`single-user/${id}`);
+            const {data} = res;
+            if(res.status === 200){
+                toast.success("Staff Deleted Successfully");
+                router("/admin/employees");
+            }
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
+
+    return { loading, deleteUser }
+}
 

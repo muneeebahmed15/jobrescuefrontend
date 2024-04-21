@@ -6,39 +6,36 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
 import axios from 'axios';
+import { formatCreatedAtDate } from '../../../UI/DateFormater';
+import { AllAnimals } from '../../../actions/addAnimal';
 // import { data } from '../../data';
 // import { AllAnimals } from '../../../actions/addAnimal';
 
 const AnimalRecord = () => {
   const path = useLocation().pathname;
 
-  // const {data, loading} = AllAnimals();
+  const {data, loading} = AllAnimals();
+// console.log(data);
 
-  // console.log(data.user);
+  const [searchData, setSearchData] = useState([]);
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+useEffect(()=>{
+  setSearchData(data)
+}, [data])
 
-  const allAnimals = async()=>{
-    setLoading(true);
-    try {
-        const res = await axios.get("get-animals")
-        if(res.status === 200){
-            console.log(res.data.user); // add this line
-            setData(res.data.user);
-        }
-    } catch (error) {
-        console.log(error);
-    }finally{
-        setLoading(false);
-    }}
-  
-  useEffect(() => {
-      const fetchData = async () => {
-          await allAnimals();
-      };
-      fetchData();
-  }, []);
+  const handleSearchChange = (e) =>{
+    const value = e.target.value;
+
+
+    const newData = data?.filter((x)=>
+  x.camperName.toLowerCase().includes(value.toLowerCase()) ||
+  x.camperGender.toLowerCase().includes(value.toLowerCase()) ||
+  x.adopterName.toLowerCase().includes(value.toLowerCase()) 
+  )
+  console.log(newData);
+
+  setSearchData(newData);
+  }
 
 
   return (
@@ -54,7 +51,11 @@ const AnimalRecord = () => {
     </div>
     <hr />
 
-     {loading? "loading..." : data?.map((x, index) =>(
+    <div className='my-3' style={{maxWidth: "300px", minWidth: "180px"}}>
+    <Input size="large" placeholder="Search..." onChange={handleSearchChange}/>
+    </div>
+
+     {loading? "loading..." : searchData?.map((x, index) =>(
       <Card key={index}>
           <div className='d-flex justify-content-between align-items-center'>
             <div className='d-flex flex-column'>
@@ -79,7 +80,7 @@ const AnimalRecord = () => {
 
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Adoption Date</label>
-              <b>{x.adoptionDate?.slice(0,10)}</b>
+              <b>{formatCreatedAtDate(x?.adoptionDate?.slice(0,10))}</b>
             </div>
             
           <Link to={`/admin/animal-records/detail/${x.id}`}> <Button>View Details</Button></Link>

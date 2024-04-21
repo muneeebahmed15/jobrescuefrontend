@@ -17,7 +17,7 @@ export const admin = [
     //     margin: "mt-4"
     // },
     {
-        title: "Employees",
+        title: "Staff",
         icon: "",
         link: "/admin/employees",
         margin: "mt-4"

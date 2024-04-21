@@ -18,7 +18,7 @@ const AddEmployee = () => {
     <>
         
          <Link to={'/admin/employees'} >
-                <Button type='primary' className='mb-5' size='large' icon={<LeftOutlined />}>Back</Button>
+                <Button type='primary' className='mb-3' size='large' icon={<LeftOutlined />}>Back</Button>
             </Link>
 
           <Card>

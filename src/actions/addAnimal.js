@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { _AuthContext } from './AuthContext';
 
 
 export const AddRecord = () =>{
@@ -13,7 +14,7 @@ export const AddRecord = () =>{
             camperGender:  "",
             camperAge: "",
             microchip:  "",
-            freezemark: "",
+            matchBox: "",
         
         
             //care record
@@ -90,30 +91,32 @@ export const AddRecord = () =>{
     return {addrecord, loading, data, handleChange}
 }
 
-// export const AllAnimals = () =>{
-//     // const [data, setData] = useState([]);
-//     // const [loading, setLoading] = useState(false);
+export const AllAnimals = () =>{
+    const {auth} = _AuthContext();
+    const authToken = auth && auth.token; 
 
-//     // const allAnimals = async()=>{
-//     //     setLoading(true);
-//     //     try {
-//     //         const res = await axios.get("get-animals")
-//     //         if(res.status === 200){
-//     //             setData(res.data);
-//     //         }
-//     //     } catch (error) {
-//     //         console.log(error);
-//     //     }finally{
-//     //         setLoading(false);
-//     //     }
-//     // }
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const allAnimals = async()=>{
+        setLoading(true);
+        try {
+            const res = await axios.get("get-animals")
+            if(res.status === 200){
+                setData(res.data.user);
+            }
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
     
-//     // useEffect(() => {
-//     //     const fetchData = async () => {
-//     //         await allAnimals();
-//     //     };
-//     //     fetchData();
-//     // }, []);
+    useEffect(() => {
+        if(authToken){
+        allAnimals();
+    }
+    }, [authToken]);
 
-//     return {data, loading}
-// }
+    return {data, loading}
+}

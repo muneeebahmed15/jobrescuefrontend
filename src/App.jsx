@@ -11,6 +11,7 @@ import CreateRecord from './Components/admin/animalRecord/CreateRecord'
 import RecordDetail from './Components/admin/animalRecord/RecordDetail'
 import AddEmployee from './Components/admin/employees/AddEmployee'
 import Admin from './Components/admin'
+import EmployeeDetail from './Components/admin/employees/EmployeeDetail'
 
 const App = () => {
   return (
@@ -38,6 +39,8 @@ const App = () => {
             <Route path='/admin/employees' element={<Employees/>}/>
 
             <Route path='/admin/employees/add' element={<AddEmployee/>} />
+
+            <Route path='/admin/employees/detail/:id' element={<EmployeeDetail/>} />
 
             <Route path='/admin/settings' element={<Setting/>}/>
 

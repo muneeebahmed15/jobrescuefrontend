@@ -5,9 +5,7 @@ import {PlusOutlined, UserOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
-// import { data } from '../../data';
 import { GetUsers } from '../../../actions/authentication';
-
 
 
 const Employees = () => {
@@ -20,9 +18,6 @@ useEffect(()=>{
   setSearchData(users)
 }, [users])
 
-// console.log(searchData);
-  
-
   const handleSearchChange = (e) =>{
     const value = e.target.value;
 
@@ -34,14 +29,6 @@ useEffect(()=>{
   )
   setSearchData(newData);
   }
-
-  const formatCreatedAtDate = (customDate) => {
-    const date = new Date(customDate);
-
-    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    return formattedDate;
-  };
-  
 
   return (
     <>
@@ -64,9 +51,7 @@ useEffect(()=>{
 
 
     { loading ? "loading..." : searchData?.map((x) =>(
-      <Card key={x._id} style={{
-        padding: '20px !important', // Adjust the padding value as needed
-      }}>
+      <Card key={x._id}>
           <div className='d-flex justify-content-between align-items-center'>
             <div>
             <Avatar size={64} icon={<UserOutlined />} style={{marginRight: "20px"}}/>
@@ -88,7 +73,7 @@ useEffect(()=>{
               <b>{x.role}</b>
             </div>
 
-            <Button>View Details</Button>
+         <Link to={`/admin/employees/detail/${x._id}`}><Button>View Details</Button></Link>   
             
           </div> 
       </Card>
