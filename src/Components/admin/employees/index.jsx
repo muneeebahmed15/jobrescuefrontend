@@ -25,12 +25,11 @@ useEffect(()=>{
 
   const handleSearchChange = (e) =>{
     const value = e.target.value;
-    // console.log(value);
 
     const newData = users?.filter((x)=>
-  x.name.toLowerCase().includes(value.toLowerCase()) ||
+  x.firstName.toLowerCase().includes(value.toLowerCase()) ||
+  x.lastName.toLowerCase().includes(value.toLowerCase()) ||
   x.role.toLowerCase().includes(value.toLowerCase()) ||
-  x.gender.toLowerCase().includes(value.toLowerCase()) ||
   x.email.toLowerCase().includes(value.toLowerCase())
   )
   setSearchData(newData);
@@ -63,19 +62,25 @@ useEffect(()=>{
     <Input size="large" placeholder="Search..." onChange={handleSearchChange}/>
     </div>
 
-    {/* {JSON.stringify(searchData)} */}
 
     { loading ? "loading..." : searchData?.map((x) =>(
-      <Card key={x._id}>
+      <Card key={x._id} style={{
+        padding: '20px !important', // Adjust the padding value as needed
+      }}>
           <div className='d-flex justify-content-between align-items-center'>
             <div>
             <Avatar size={64} icon={<UserOutlined />} style={{marginRight: "20px"}}/>
-            <b>{x.name}</b>
+            <b>{`${x.firstName} ${x.lastName}`}</b>
             </div>
 
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Email</label>
               <b>{x.email}</b>
+            </div>
+
+            <div className='d-flex flex-column'>
+              <label className='text-secondary'>Phone</label>
+              <b>{x.phone}</b>
             </div>
             
             <div className='d-flex flex-column'>
@@ -83,17 +88,8 @@ useEffect(()=>{
               <b>{x.role}</b>
             </div>
 
-            <div className='d-flex flex-column'>
-              <label className='text-secondary'>Joining Date</label>
-              <b>{formatCreatedAtDate(x.createdAt)}</b>
-            </div>
-
-
-            <div className='d-flex flex-column'>
-              <label className='text-secondary'>Gender</label>
-              <b>{x.gender}</b>
-            </div>
-
+            <Button>View Details</Button>
+            
           </div> 
       </Card>
       ))}

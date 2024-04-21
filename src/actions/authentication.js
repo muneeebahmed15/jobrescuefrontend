@@ -68,12 +68,33 @@ export const CurrentUser = () =>{
 }
 
 export const RegisterStaff = () => {
-    const [data, setData] = useState({role: "", email: "", password: "", gender: "", name: "", DOB: ""});
     const [loading, setLoading] = useState(false);
+    const router = useNavigate();
+    const [data, setData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        DOB: "",
+        emergencyContactName: "",
+        emergencyContactNumber: "",
+        role:"",
+        otherRole:"",
+        availability: [""],
+        photo: "",
+        password: "",
+        notes: ""
+    });
+
+    // console.log(data);
 
     const changeHandler = (e) =>{
         setData({...data, [e.target.name]: e.target.value})
     }
+    const checkHandler = (checkedValues) => {
+        setData({ ...data, availability: checkedValues });
+      };
 
     const register = async() =>{
         setLoading(true);
@@ -81,7 +102,24 @@ export const RegisterStaff = () => {
             const res = await axios.post("/register-user", data);
             console.log(res);
            if(res.status === 200){
-            toast.success("Staff added successfully")
+            toast.success("Staff added successfully");
+            setData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                phone: "",
+                address: "",
+                DOB: "",
+                emergencyContactName: "",
+                emergencyContactNumber: "",
+                role:"",
+                otherRole:"",
+                availability: [""],
+                photo: "",
+                password: "",
+                notes: ""
+            });
+            router("/admin/employees")
            }
         } catch (error) {
             if(error.response.status === 400){toast.error("Email already exists")}
@@ -91,28 +129,30 @@ export const RegisterStaff = () => {
         }
     }
 
-    return { register, data, loading, changeHandler }
+    return { register, data, checkHandler, loading, changeHandler }
 }
 
 export const GetUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const { auth } = _AuthContext();
-  const AuthToken = auth?.token;
+  const AuthToken = auth && auth?.token;
+
+  const getusers = async () => {
+    setLoading(true);
+    try {
+      const {data} = await axios.get("get-users")
+      setUsers(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+//   console.log(users);
 
   useEffect(() => {
-    const getusers = async () => {
-        setLoading(true);
-        try {
-          const {data} = await axios.get("get-users")
-          setUsers(data);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
     if (AuthToken) {
       getusers();
     }

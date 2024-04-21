@@ -638,6 +638,8 @@ const CreateRecord = () => {
 </div>
 
 
+
+
              <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Brand Inspection</label>
             <select className='form-select' name='brandInspection' value={data.brandInspection} onChange={handleChange} >
