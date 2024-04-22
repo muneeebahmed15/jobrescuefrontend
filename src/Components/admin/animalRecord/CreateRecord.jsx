@@ -34,7 +34,7 @@ const CreateRecord = () => {
           <label className='form-label'>Source of Animal</label> <br />
          <select className='form-select' 
          name='burroSource' value={data.burroSource} onChange={handleChange}>
-          <option selected>Choose Source</option>
+          <option defaultValue>Choose Source</option>
           <option value="BLM">BLM</option>
           <option value="Re Home">Re Home</option>
           <option value="Sale Barn">Sale Barn</option>
@@ -45,27 +45,29 @@ const CreateRecord = () => {
 
           <InputField label={"Animal Name"} type={"text"} placeholder={"Animal Name"} name={"animalName"} value={data.animalName} onChange={handleChange} />
           
-          <InputField label={"Animal Photo"} type={"file"} placeholder={"Camper Photo"} name={"camperphoto"} value={""} onChange={handleChange} />
+          <InputField label={"Animal Photo"} type={"file"} placeholder={"Animal Photo"} name={"animalPhoto"} value={""} onChange={handleChange} />
           
           <div className="col-md-6 rightSpace mt-2">
-          <label className='form-label'>Camper Gender</label> <br />
-          <select className='form-select' name='camperGender'
-           value={data.camperGender} onChange={handleChange}>
+          <label className='form-label'>Animal Gender</label> <br />
+          <select className='form-select' name='animalGender'
+           value={data.animalGender} onChange={handleChange}>
 
-          <option selected>Choose Gender</option>
+          <option defaultValue>Choose Gender</option>
             <option value="Female">Female</option>
             <option value="Male-Intact">Male-Intact</option>
             <option value="Male-Gelded">Male-Gelded</option>
           </select>
           </div>
 
-          <InputField label={"Age"} type={"number"} placeholder={"Age"} name={"camperAge"} value={data.camperAge} onChange={handleChange} />
+          <InputField label={"Animal Age"} type={"number"} placeholder={"Animal Age"} name={"animalAge"} value={data.camperAge} onChange={handleChange} />
+          
+          <InputField label={"Age Notes"} type={"text"} placeholder={"Age Notes"} name={"ageNotes"} value={data.ageNotes} onChange={handleChange} />
           
           <InputField label={"Match Box"} type={"text"} placeholder={"Match"} name={"matchBox"} value={data.matchBox} onChange={handleChange} />
           
           <InputField label={"Microchip #"} type={"number"} placeholder={"Enter 15 digit code"} name={"microchip"} value={data.microchip} onChange={handleChange} />
           
-          <InputField label={"Notes"} type={"text"} placeholder={"Notes"} name={"notes"} value={data.notes} onChange={handleChange} />
+          <InputField label={"Notes"} type={"text"} placeholder={"Notes"} name={"animalNotes"} value={data.animalNotes} onChange={handleChange} />
 
           </div>
 
@@ -102,25 +104,26 @@ const CreateRecord = () => {
               <div className="row">
              <h3>Care Record</h3>
 
-                       
-          <InputField label={"Vaccination Date"} type={"date"} placeholder={"Vaccination Date"} name={"vaccination"} value={data.vaccination} onChange={handleChange} />
+          {/* vaccination */}
+          <InputField label={"Vaccination Date"} type={"date"} placeholder={"Vaccination Date"} name={"vaccination"} value={data.vaccination} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Next Vaccination Due"} type={"date"} placeholder={"Next Vaccination Due"} name={"nextVaccination"} value={data.nextVaccination} onChange={handleChange} />
+          <InputField label={"Next Vaccination Due"} type={"date"} placeholder={"Next Vaccination Due"} name={"nextVaccination"} value={data.nextVaccination} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} />
+          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Add Rabies"} type={"date"} placeholder={"Add Rabies"} name={"addRabies"} value={data.addRabies} onChange={handleChange} />
+          {/* rabies */}
+          <InputField label={"Add Rabies"} type={"date"} placeholder={"Add Rabies"} name={"addRabies"} value={data.addRabies} onChange={handleChange} from={"col-3"}/>
 
-          <InputField label={"Next Rabies Due"} type={"date"} placeholder={"Next Rabies Due"} name={"nextRabies"} value={data.nextRabies} onChange={handleChange} />
+          <InputField label={"Next Rabies Due"} type={"date"} placeholder={"Next Rabies Due"} name={"nextRabies"} value={data.nextRabies} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"nextRabies"} value={data.nextRabies} onChange={handleChange} />
+          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"rabiesSerial"} value={data.rabiesSerial} onChange={handleChange} from={"col-3"}/>
 
+          {/* farrier */}
+          <InputField label={"Farrier"} type={"date"} placeholder={"Farrier"} name={"farrier"} value={data.farrier} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Farrier"} type={"date"} placeholder={"Farrier"} name={"farrier"} value={data.farrier} onChange={handleChange} />
+          <InputField label={"Next Due Farrier"} type={"date"} placeholder={"Next Due Farrier"} name={"nextFarrie"} value={data.nextFarrie} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Next Due Farrier"} type={"date"} placeholder={"Next Due Farrier"} name={"nextFarrie"} value={data.nextFarrie} onChange={handleChange} />
-          
-          <div className="col-md-6 px-2 mt-2">
+          <div className="col-md-4 px-2 mt-2">
                 <label className='form-label'>Farrier Name</label>
               <select className='form-select' name='farrierName' value={data.farrierName} onChange={handleChange} size='large' >
                 <option defaultValue>Choose Farrier Name</option>
@@ -133,49 +136,30 @@ const CreateRecord = () => {
               </div>
 
               {data.farrierName === "Other" && 
-              <InputField label={"Other Farrier Name"} placeholder={"Farrier Name"} type={"text"} name={"farrierName"} value={data.farrierName} onChange={changeHandler}/>
+              <InputField label={"Other Farrier Name"} placeholder={"Farrier Name"} type={"text"} name={"otherFarrierName"} value={data.otherFarrierName} onChange={handleChange} from={"col-3"}/>
               }
           
-          <InputField label={"De-Worm"} type={"date"} placeholder={"De-Worm"} name={"deWorm"} value={data.deWorm} onChange={handleChange} />
+          {/* de-worm */}
+          <InputField label={"De-Worm"} type={"date"} placeholder={"De-Worm"} name={"deWorm"} value={data.deWorm} onChange={handleChange} from={"col-3"}/>
             
-          <InputField label={"Next De-Worm Due"} type={"date"} placeholder={"Next De-Worm Due"} name={"nextDeWorm"} value={data.nextDeWorm} onChange={handleChange} />
+          <InputField label={"Next De-Worm Due"} type={"date"} placeholder={"Next De-Worm Due"} name={"nextDeWorm"} value={data.nextDeWorm} onChange={handleChange} from={"col-3"}/>
 
-          <InputField label={"Brand of Dewormer "} type={"text"} placeholder={"Brand of Dewormer "} name={"deWormBrand"} value={data.deWormBrand} onChange={handleChange} />
+          <InputField label={"Brand of Dewormer "} type={"text"} placeholder={"Brand of Dewormer "} name={"deWormBrand"} value={data.deWormBrand} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Sand Clear"} type={"date"} placeholder={"Sand Clear"} name={"sandClear"} value={data.sandClear} onChange={handleChange} />
+          {/* sand clear */}
+          <InputField label={"Sand Clear"} type={"date"} placeholder={"Sand Clear"} name={"sandClear"} value={data.sandClear} onChange={handleChange} from={"col-3"}/>
     
-          <InputField label={"Next Sand Clear Due"} type={"date"} placeholder={"Next Sand Clear Due"} name={"nextSandClear"} value={data.nextSandClear} onChange={handleChange} />
-
+          <InputField label={"Next Sand Clear Due"} type={"date"} placeholder={"Next Sand Clear Due"} name={"nextSandClear"} value={data.nextSandClear} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Health Certificate"} type={"date"} placeholder={"Health Certificate"} name={"healthCertificate"} value={data.healthCertificate} onChange={handleChange} />
+          <InputField label={"Health Certificate"} type={"date"} placeholder={"Health Certificate"} name={"healthCertificate"} value={data.healthCertificate} onChange={handleChange} from={"col-3"}/>
 
           
           <InputField label={"Coggins"} type={"date"} placeholder={"Coggins"} name={"coggins"} value={data.coggins} onChange={handleChange} />
           
           <InputField label={"Gelded"} type={"date"} placeholder={""} name={"gelded"} value={data.gelded} onChange={handleChange} />
 
-          <InputField label={"ADD Notes"} type={"text"} placeholder={"Add Notes"} name={"notes"} value={data.notes} onChange={handleChange} />
+          <InputField label={"ADD Notes"} type={"text"} placeholder={"Add Notes"} name={"careNotes"} value={data.careNotes} onChange={handleChange} />
 
-          {/* <div className="col-md-6 rightSpace mt-2">
-          <label className='form-label'>Gelded</label>
-            <select className='form-select' name='gelded' value={data.gelded} onChange={handleChange} >
-              <option selected>Choose Gelded</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Scheduled">Scheduled</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </div> */}
-
-          {/* <div className="col-md-6 rightSpace mt-2">
-          <label className='form-label'>Foal</label>
-            <select className='form-select' name='foal' value={data.foal} onChange={handleChange} >
-              <option selected>Choose Foal</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Pregnant">Pregnant</option>
-            </select>
-          </div> */}
           </div>
           </Card>
         </>
@@ -193,7 +177,7 @@ const CreateRecord = () => {
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Touch/Take Reward</label>
             <select className='form-select' name='touch' value={data.touch} onChange={handleChange} >
-              <option selected>Choose option</option>
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
@@ -204,8 +188,8 @@ const CreateRecord = () => {
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Brush/Groom</label>
-            <select className='form-select' name='touch' value={data.touch} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='brush' value={data.brush} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
@@ -216,70 +200,70 @@ const CreateRecord = () => {
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Halter</label>
-            <select className='form-select' name='halten' value={data.halten} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='halter' value={data.halter} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
           
-          <InputField label={"Halter Photo"} type={"file"} placeholder={""} name={"halter"} value={data.halter} onChange={handleChange} />
+          <InputField label={"Halter Photo"} type={"file"} placeholder={""} name={"halterPicture"} value={data.halterPicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Lead Rope On</label>
             <select className='form-select' name='leadRope' value={data.leadRope} onChange={handleChange} >
-              <option selected>Choose option</option>
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
           
-          <InputField label={"Lead Rope On Photo"} type={"file"} placeholder={""} name={"leadRopeOn"} value={data.leadRopeOn} onChange={handleChange} />
+          <InputField label={"Lead Rope On Photo"} type={"file"} placeholder={""} name={"leadRopePicture"} value={data.leadRopePicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Lead in Small Area</label>
-            <select className='form-select' name='leadIn' value={data.leadIn} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='leadInSmall' value={data.leadInSmall} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
           
-          <InputField label={"Lead Small Area Photo"} type={"file"} placeholder={""} name={"leadSmallPicture"} value={data.leadSmallPicture} onChange={handleChange} />
+          <InputField label={"Lead Small Area Photo"} type={"file"} placeholder={""} name={"leadInSmallPicture"} value={data.leadInSmallPicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Lead in Large Area</label>
-            <select className='form-select' name='leadIn' value={data.leadIn} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='leadInLarge' value={data.leadInLarge} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
 
-          <InputField label={"Lead Large Area Photo"} type={"file"} placeholder={""} name={"leadLargePicture"} value={data.leadLargePicture} onChange={handleChange} />
+          <InputField label={"Lead Large Area Photo"} type={"file"} placeholder={""} name={"leadInLargePicture"} value={data.leadInLargePicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Lead in Pasture(outside pen)</label>
-            <select className='form-select' name='leadIn' value={data.leadIn} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='leadInPasture' value={data.leadInPasture} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
          
-          <InputField label={"Lead in Pasture(outside pen)"} type={"file"} placeholder={""} name={"leadPasture"} value={data.leadPasture} onChange={handleChange} />
+          <InputField label={"Lead in Pasture(outside pen)"} type={"file"} placeholder={""} name={"leadInPasturePicture"} value={data.leadInPasturePicture} onChange={handleChange} />
        
           {/* <InputField label={"Lead Pasture Photo"} type={"file"} placeholder={""} name={"leadPasturePicture"} value={data.leadPasturePicture} onChange={handleChange} /> */}
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Tie</label>
             <select className='form-select' name='tie' value={data.tie} onChange={handleChange} >
-              <option selected>Choose option</option>
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
@@ -290,8 +274,8 @@ const CreateRecord = () => {
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Touch Feet</label>
-            <select className='form-select' name='touchLess' value={data.touchLess} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='touchFeet' value={data.touchFeet} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
@@ -302,32 +286,32 @@ const CreateRecord = () => {
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Pick Up feet</label>
-            <select className='form-select' name='pickupLess' value={data.pickupLess} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='pickupFeet' value={data.pickupFeet} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
 
-          <InputField label={"Pick Up feet Photo"} type={"file"} placeholder={""} name={"touchFeetPicture"} value={data.touchFeetPicture} onChange={handleChange} />
+          <InputField label={"Pick Up feet Photo"} type={"file"} placeholder={""} name={"pickupFeetPicture"} value={data.pickupFeetPicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Pick Out feet</label>
-            <select className='form-select' name='pickupLess' value={data.pickupLess} onChange={handleChange} >
-              <option selected>Choose option</option>
+            <select className='form-select' name='pickoutFeet' value={data.pickoutFeet} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
             </select>
           </div>
 
-          <InputField label={"Pick Out Photo"} type={"file"} placeholder={""} name={"pickUpPicture"} value={data.pickUpPicture} onChange={handleChange} />
+          <InputField label={"Pick Out Photo"} type={"file"} placeholder={""} name={"pickoutFeetPicture"} value={data.pickUpPicture} onChange={handleChange} />
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Trailer Load</label>
             <select className='form-select' name='trailerLoad' value={data.trailerLoad} onChange={handleChange} >
-              <option selected>Choose option</option>
+              <option defaultValue>Choose option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Working">Working</option>
@@ -336,7 +320,7 @@ const CreateRecord = () => {
           
           <InputField label={"Trailer Load Photo"} type={"file"} placeholder={""} name={"tailerLoadPicture"} value={data.tailerLoadPicture} onChange={handleChange} />
           
-          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"notes"} value={data.notes} onChange={handleChange} />
+          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"trainingNotes"} value={data.trainingNotes} onChange={handleChange} />
 
           </div>
           </Card>
@@ -409,7 +393,7 @@ const CreateRecord = () => {
 
              <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Adoption Date</label>
-            <Input size='large' type='date' placeholder='Healer' name="adoptionDate" value={data.adoptionDate} onChange={handleChange} />
+            <Input size='large' type='date' placeholder='' name="adoptionDate" value={data.adoptionDate} onChange={handleChange} />
           </div>
 
           <div className="col-md-6 rightSpace mt-2">
@@ -440,8 +424,8 @@ const CreateRecord = () => {
 
            <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Adopter State</label>
-             <select className='form-select' name='adopterStreet' value={data.adopterStreet} onChange={handleChange} >
-              <option selected>Choose option</option>
+             <select className='form-select' name='aopterState' value={data.aopterState} onChange={handleChange} >
+              <option defaultValue>Choose option</option>
              <option value="Alabama">Alabama</option>
 <option value="Alaska">Alaska</option>
 <option value="Arizona">Arizona</option>
@@ -511,8 +495,8 @@ const CreateRecord = () => {
       className="form-check-input"
       type="checkbox"
       id="facebook"
-      name="facebook"
-      checked={data.facebook}
+      name="adopterSource"
+      checked={data.adopterSource}
       onChange={handleChange}
     />
     <label className='form-check-label' htmlFor="facebook">Facebook</label>
@@ -523,8 +507,8 @@ const CreateRecord = () => {
       className="form-check-input"
       type="checkbox"
       id="website"
-      name="website"
-      checked={data.website}
+      name="adopterSource"
+      checked={data.adopterSource}
       onChange={handleChange}
     />
     <label className='form-check-label' htmlFor="website">Website</label>
@@ -537,8 +521,8 @@ const CreateRecord = () => {
       className="form-check-input"
       type="checkbox"
       id="referral"
-      name="referral"
-      checked={data.referral}
+      name="adopterSource"
+      checked={data.adopterSource}
       onChange={handleChange}
     />
     <label className='form-check-label' htmlFor="referral">Referral</label>
@@ -549,8 +533,8 @@ const CreateRecord = () => {
       className="form-check-input"
       type="checkbox"
       id="previousAdopter"
-      name="previousAdopter"
-      checked={data.previousAdopter}
+      name="adopterSource"
+      checked={data.adopterSource}
       onChange={handleChange}
     />
     <label className='form-check-label' htmlFor="previousAdopter">Previous Adopter</label>
@@ -563,12 +547,12 @@ const CreateRecord = () => {
       className="form-check-input"
       type="checkbox"
       id="other"
-      name="other"
-      checked={data.other}
+      name="adopterSource"
+      checked={data.adopterSource}
       onChange={handleChange}
     />
     <label className='form-check-label' htmlFor="other">Other</label>
-    {data.other && (
+    {data.adopterSource === "other" && (
       <input
         className="form-control mt-2"
         type="text"
@@ -586,7 +570,7 @@ const CreateRecord = () => {
              <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Brand Inspection</label>
             <select className='form-select' name='brandInspection' value={data.brandInspection} onChange={handleChange} >
-              <option selected>Choose option</option>
+              <option defaultValue>Choose option</option>
               <option value="Yes">Sheduled</option>
               <option value="No">Completed</option>
             </select>
@@ -595,30 +579,32 @@ const CreateRecord = () => {
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Halter Color Requested</label>
             <select className='form-select' name='halterColor' value={data.halterColor} onChange={handleChange} >
-              <option selected>Choose option</option>
-              <option value="Yes">Red</option>
-              <option value="No">Orange</option>
-              <option value="No">Green</option>
-              <option value="No">Blue</option>
-              <option value="No">Purple</option>
-              <option value="No">Black with Tan</option>
-              <option value="No">Other</option>
-              <Input size='large' type='text' placeholder='Type Color' name="adopterZip" value={data.adopterZip}  />
-           
-            </select>
+              <option defaultValue>Choose option</option>
+              <option value="Red">Red</option>
+              <option value="Orange">Orange</option>
+              <option value="Green">Green</option>
+              <option value="Blue">Blue</option>
+              <option value="Purple">Purple</option>
+              <option value="Black with Tan">Black with Tan</option>
+              <option value="Other">Other</option>
+              </select>
           </div>
+
+          {data.halterColor === "Other" &&           
+          <InputField label={"Add Color"} type={"text"} placeholder={"Add Color"} name={"otherHalterColor"} value={data.otherHalterColor} onChange={handleChange} />
+}
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Halter Size</label>
             <select className='form-select' name='halterSize' value={data.halterSize} onChange={handleChange} >
-              <option selected>Choose option</option>
-              <option value="Yes">Weanling</option>
-              <option value="No">Yearling</option>
-              <option value="No">Small</option>
+              <option defaultValue>Choose option</option>
+              <option value="Weanling">Weanling</option>
+              <option value="Yearling">Yearling</option>
+              <option value="Small">Small</option>
             </select>
           </div>
 
-          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"notes"} value={data.notes} onChange={handleChange} />
+          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"adopterNotes"} value={data.adopterNotes} onChange={handleChange} />
 
 
           </div>

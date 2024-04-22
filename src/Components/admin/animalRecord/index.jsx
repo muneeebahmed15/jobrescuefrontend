@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../layout'
 import { Button, Card, Input } from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
-import axios from 'axios';
 import { formatCreatedAtDate } from '../../../UI/DateFormater';
 import { AllAnimals } from '../../../actions/addAnimal';
-// import { data } from '../../data';
-// import { AllAnimals } from '../../../actions/addAnimal';
 
 const AnimalRecord = () => {
   const path = useLocation().pathname;
@@ -28,9 +24,9 @@ useEffect(()=>{
 
 
     const newData = data?.filter((x)=>
-  x.camperName.toLowerCase().includes(value.toLowerCase()) ||
-  x.camperGender.toLowerCase().includes(value.toLowerCase()) ||
-  x.adopterName.toLowerCase().includes(value.toLowerCase()) 
+  x.camperName?.toLowerCase().includes(value.toLowerCase()) ||
+  x.camperGender?.toLowerCase().includes(value.toLowerCase()) ||
+  x.adopterName?.toLowerCase().includes(value.toLowerCase()) 
   )
   console.log(newData);
 
@@ -60,17 +56,17 @@ useEffect(()=>{
           <div className='d-flex justify-content-between align-items-center'>
             <div className='d-flex flex-column'>
             <label className='text-secondary'>Animal Name</label>
-             <b>{x.camperName}</b>
+             <b>{x.animalName}</b>
             </div>
             
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Age</label>
-              <b>{x.camperAge}</b>
+              <b>{x.animalAge}</b>
             </div>
 
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Gender</label>
-              <b>{x.camperGender}</b>
+              <b>{x.animalGender}</b>
             </div>
 
             <div className='d-flex flex-column'>
@@ -80,7 +76,7 @@ useEffect(()=>{
 
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Adoption Date</label>
-              <b>{formatCreatedAtDate(x?.adoptionDate?.slice(0,10))}</b>
+              <b>{x.adoptionDate && formatCreatedAtDate(x?.adoptionDate?.slice(0,10))}</b>
             </div>
             
           <Link to={`/admin/animal-records/detail/${x.id}`}> <Button>View Details</Button></Link>

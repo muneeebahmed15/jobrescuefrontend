@@ -2,84 +2,123 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { _AuthContext } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export const AddRecord = () =>{
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-            // arrivalDate:  "",
-            animalSource:  "",
+            burroSource:  "",
             animalName:  "",
-            // camperPhoto: { type: Date },
-            camperGender:  "",
-            camperAge: "",
+            // camperPhoto: "",
+            animalGender:  "",
+            animalAge: "",
             microchip:  "",
             matchBox: "",
-        
+            ageNotes: "",
+            animalNotes: "",
         
             //care record
             vaccination:  "",
             nextVaccination:  "",
+            vaccinationSerial: "",
+
+            addRabies:"",
+            nextRabies: "",
+            rabiesSerial: "",
         
             farrier:  "",
             nextFarrie:  "",
+            farrierName: "",
+            otherFarrierName: "",
         
             deWorm:  "",
             nextDeWorm:  "",
+            deWormBrand: "",
         
             sandClear: "" ,
             nextSandClear:  "",
+            healthCertificate: "",
         
-            Coggins:  "",
+            coggins:  "",
         
             gelded:  "",
-        
-            foal:  "",
+
+            careNotes: "",
         
             //training
         
             touch: "" ,
+            touchPicture: "",
         
-            halten:  "" ,
+            brush:  "" ,
+            brushPicture:"",
+
+            halter: "",
+            halterPicture: "",
         
             leadRope:  "" ,
+            leadRopePicture: "",
         
-            leadIn:   "",
+            leadInSmall:   "",
+            leadInSmallPicture: "",
+
+            leadInLarge: "",
+            leadInLargePicture: "",
+
+            leadInPasture: "",
+            leadInPasturePicture: "",
         
             tie:  "" ,
+            tiePicture: "",
         
-            touchLess:  "" ,
+            touchFeet:  "" ,
+            touchFeetPicture: "",
+
+            pickupFeet: "",
+            pickupFeetPicture: "",
         
-            pickupLess:  "" ,
+            pickoutFeet:  "" ,
+            pickoutFeetPicture: "",
         
-            trailerLoad: ""  ,
+            trailerLoad: "" ,
+            tailerLoadPicture: "",
+
+            trainingNotes: "",
         
             //adoptionInformation
-        
-            brandInspection:  "" ,
-            halterColor:  "" ,
-            halterSize:  "" ,
             adoptionDate:  "" ,
             adopterName:  "" ,
-            adopterAddress:  "" ,
-            tieToPost:  "" ,
+            adopterEmail:  "" ,
+            adopterPhone: "",
+            adopterStreet: "",
             adopterCity:  "" ,
             aopterState:   "",
             adopterZip:   "",
-            adopterEmail:  "" ,
-            adopterPhone: "" 
+            // adopterSource: [],
+            
+            brandInspection:  "" ,
+            halterColor:  "" ,
+            otherHalterColor: "",
+            halterSize:  "" ,
+            adopterNotes: ""
     })
+    const router = useNavigate();
 
     const handleChange = (e) =>{
         setData({...data, [e.target.name]: e.target.value})
     }
 
+    // console.log(data);
+
     const addrecord = async() =>{
         setLoading(true);
         try {
             const res = await axios.post("add-animal", data);
+            console.log(res);
             if(res.status === 200){
                 toast.success("Camper Added");
+                router("/admin/animal-records")
             }
         } catch (error) {
             console.log(error);
