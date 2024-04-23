@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import Layout from '../../layout';
-import { Button, message, Steps, Form, Input, Card, Select } from 'antd';
+import { Button, message, Steps, Form, Input, Card, Select, Upload } from 'antd';
 import { AddRecord } from '../../../actions/addAnimal';
 import InputField from '../../../UI/InputField';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Step } = Steps;
 
 const CreateRecord = () => {
+  const currentYear = new Date().getFullYear;
+  console.log(currentYear);
   const [current, setCurrent] = useState(0);
  
 
   const {addrecord, data, loading, handleChange} = AddRecord();
-
 
   const next = () => {
     setCurrent(current + 1);
@@ -45,8 +47,11 @@ const CreateRecord = () => {
 
           <InputField label={"Animal Name"} type={"text"} placeholder={"Animal Name"} name={"animalName"} value={data.animalName} onChange={handleChange} />
           
-          <InputField label={"Animal Photo"} type={"file"} placeholder={"Animal Photo"} name={"animalPhoto"} value={""} onChange={handleChange} />
-          
+          <div className="col-md-6 rightSpace mt-2">
+        <label className='form-label'>Animal Photo</label>
+          <Input size='large' type='file' placeholder='' name="animalPhoto" value={data.animalPhoto} onChange={handleChange} />
+        </div>
+
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Animal Gender</label> <br />
           <select className='form-select' name='animalGender'
@@ -59,25 +64,45 @@ const CreateRecord = () => {
           </select>
           </div>
 
-          <InputField label={"Animal Age"} type={"number"} placeholder={"Animal Age"} name={"animalAge"} value={data.camperAge} onChange={handleChange} />
+          <InputField label={"Animal Age"} type={"date"} placeholder={"Animal Age"} name={"animalAge"} value={data.camperAge} onChange={handleChange} />
+          
+          {/* <div className="col-md-6 rightSpace mt-2">
+          <label className='form-label'>Animal Gender</label> <br />
+          <select className='form-select' name='animalYear'
+           value={data.animalYear} onChange={handleChange}>
+           <option defaultValue>Choose Birth Year</option>
+           <option value="2024">2024</option>
+           <option value="2023">2023</option>
+           <option value="2022">2022</option>
+           <option value="2021">2021</option>
+           <option value="2020">2020</option>
+           <option value="2019">2019</option>
+           <option value="2018">2018</option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+           <option value=""></option>
+          </select>
+          </div> */}
+
+          <InputField label={"Animal Birth Year"} type={"number"} placeholder={"Animal Birth Year"} name={"animalYear"} value={data.animalYear} onChange={handleChange} />
           
           <InputField label={"Age Notes"} type={"text"} placeholder={"Age Notes"} name={"ageNotes"} value={data.ageNotes} onChange={handleChange} />
           
-          <InputField label={"Match Box"} type={"text"} placeholder={"Match"} name={"matchBox"} value={data.matchBox} onChange={handleChange} />
+          <InputField label={"Freeze Mark"} type={"text"} placeholder={"Freeze Mark"} name={"freezeMark"} value={data.freezeMark} onChange={handleChange} />
           
           <InputField label={"Microchip #"} type={"number"} placeholder={"Enter 15 digit code"} name={"microchip"} value={data.microchip} onChange={handleChange} />
           
-          <InputField label={"Notes"} type={"text"} placeholder={"Notes"} name={"animalNotes"} value={data.animalNotes} onChange={handleChange} />
-
+         
+            <div className="col-12 mt-3">
+        <label className='form-label'>Notes</label>
+          <Input size='large' type='text' placeholder='Notes' name="animalNotes" value={data.animalNotes} onChange={handleChange} />
+        </div>
           </div>
 
-         {/* {data.sourceOfBurro === "BLM" &&
-            <div className="row mt-3">
-            <h3>IF BLM</h3>
-            <div className="col-md-6 rightSpace mt-2">
-        <label className='form-label'>Freeze Mark</label>
-          <Input size='large' type='freezeMark' placeholder='Freeze Mark' name="freezeMark" value={""} onChange={handleChange} />
-        </div>
+         {/*
 
         <div className="col-md-6 rightSpace mt-2">
         <label className='form-label'>Herd Management Area</label>
@@ -109,14 +134,14 @@ const CreateRecord = () => {
           
           <InputField label={"Next Vaccination Due"} type={"date"} placeholder={"Next Vaccination Due"} name={"nextVaccination"} value={data.nextVaccination} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"number"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} from={"col-3"}/>
+          <InputField label={"Vaccination Serial #"} type={"text"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} from={"col-3"}/>
           
           {/* rabies */}
-          <InputField label={"Add Rabies"} type={"date"} placeholder={"Add Rabies"} name={"addRabies"} value={data.addRabies} onChange={handleChange} from={"col-3"}/>
+          <InputField label={"Rabies"} type={"date"} placeholder={"Add Rabies"} name={"addRabies"} value={data.addRabies} onChange={handleChange} from={"col-3"}/>
 
           <InputField label={"Next Rabies Due"} type={"date"} placeholder={"Next Rabies Due"} name={"nextRabies"} value={data.nextRabies} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"number"} placeholder={"Vaccination Serial #"} name={"rabiesSerial"} value={data.rabiesSerial} onChange={handleChange} from={"col-3"}/>
+          <InputField label={"Rabies Serial #"} type={"text"} placeholder={"Vaccination Serial #"} name={"rabiesSerial"} value={data.rabiesSerial} onChange={handleChange} from={"col-3"}/>
 
           {/* farrier */}
           <InputField label={"Farrier"} type={"date"} placeholder={"Farrier"} name={"farrier"} value={data.farrier} onChange={handleChange} from={"col-3"}/>
@@ -153,12 +178,14 @@ const CreateRecord = () => {
           
           <InputField label={"Health Certificate"} type={"date"} placeholder={"Health Certificate"} name={"healthCertificate"} value={data.healthCertificate} onChange={handleChange} from={"col-3"}/>
 
-          
           <InputField label={"Coggins"} type={"date"} placeholder={"Coggins"} name={"coggins"} value={data.coggins} onChange={handleChange} />
           
           <InputField label={"Gelded"} type={"date"} placeholder={""} name={"gelded"} value={data.gelded} onChange={handleChange} />
 
-          <InputField label={"ADD Notes"} type={"text"} placeholder={"Add Notes"} name={"careNotes"} value={data.careNotes} onChange={handleChange} />
+          <div className="col-12 mt-3">
+        <label className='form-label'>Notes</label>
+          <Input size='large' type='text' placeholder='Notes' name="careNotes" value={data.careNotes} onChange={handleChange} />
+        </div>
 
           </div>
           </Card>
@@ -320,7 +347,10 @@ const CreateRecord = () => {
           
           <InputField label={"Trailer Load Photo"} type={"file"} placeholder={""} name={"tailerLoadPicture"} value={data.tailerLoadPicture} onChange={handleChange} />
           
-          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"trainingNotes"} value={data.trainingNotes} onChange={handleChange} />
+          <div className="col-12 rightSpace mt-2">
+        <label className='form-label'>Notes</label>
+          <Input size='large' type='text' placeholder='Notes' name="trainingNotes" value={data.trainingNotes} onChange={handleChange} />
+        </div>
 
           </div>
           </Card>
@@ -486,73 +516,21 @@ const CreateRecord = () => {
           </div>
 
           <div className="col-md-6 rightSpace mt-2">
-  <label className='form-label'>Source of Adopter</label>
+          <label className='form-label'>Source of Adopter</label>
+          <select className='form-select'>
+          <option defaultValue>Choose Source of Adopter</option>
+          <option value="Referral">Referral</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Website">Website</option>
+          <option value="Previous Adopter">Previous Adopter</option>
+          <option value="Other">Other</option>
+          </select>
+          </div>
+
  
- <div className='d-flex justify-content-between'>
-  <label className='form-label'>Select one from</label>
-  <div>
-    <input
-      className="form-check-input"
-      type="checkbox"
-      id="facebook"
-      name="adopterSource"
-      checked={data.adopterSource}
-      onChange={handleChange}
-    />
-    <label className='form-check-label' htmlFor="facebook">Facebook</label>
-  </div>
-
-  <div>
-    <input
-      className="form-check-input"
-      type="checkbox"
-      id="website"
-      name="adopterSource"
-      checked={data.adopterSource}
-      onChange={handleChange}
-    />
-    <label className='form-check-label' htmlFor="website">Website</label>
-  </div>
-  </div>
-
-  <div className='d-flex justify-content-between'>
-  <div>
-    <input
-      className="form-check-input"
-      type="checkbox"
-      id="referral"
-      name="adopterSource"
-      checked={data.adopterSource}
-      onChange={handleChange}
-    />
-    <label className='form-check-label' htmlFor="referral">Referral</label>
-  </div>
-
-  <div>
-    <input
-      className="form-check-input"
-      type="checkbox"
-      id="previousAdopter"
-      name="adopterSource"
-      checked={data.adopterSource}
-      onChange={handleChange}
-    />
-    <label className='form-check-label' htmlFor="previousAdopter">Previous Adopter</label>
-  </div>
-  </div>
-
-  <div className='d-flex justify-content-between'>
-  <div>
-    <input
-      className="form-check-input"
-      type="checkbox"
-      id="other"
-      name="adopterSource"
-      checked={data.adopterSource}
-      onChange={handleChange}
-    />
-    <label className='form-check-label' htmlFor="other">Other</label>
-    {data.adopterSource === "other" && (
+ {data.adopterSource === "Other" && (
+  
+  <div className="col-md-6 rightSpace mt-2">
       <input
         className="form-control mt-2"
         type="text"
@@ -562,10 +540,9 @@ const CreateRecord = () => {
         onChange={handleChange}
         placeholder="Type Source"
       />
+      </div>
     )}
-  </div>
-  </div>
-</div>
+
 
              <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Brand Inspection</label>
@@ -604,8 +581,10 @@ const CreateRecord = () => {
             </select>
           </div>
 
-          <InputField label={"Add Notes"} type={"text"} placeholder={"Add Notes"} name={"adopterNotes"} value={data.adopterNotes} onChange={handleChange} />
-
+          <div className="col-12 rightSpace mt-2">
+          <label className='form-label'>Notes</label>
+            <Input size='large' type='text' placeholder='Notes' name="adopterNotes" value={data.adopterNotes} onChange={handleChange} />
+          </div>
 
           </div>
           </Card>

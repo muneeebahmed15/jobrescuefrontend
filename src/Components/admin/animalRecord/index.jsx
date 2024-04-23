@@ -40,7 +40,7 @@ useEffect(()=>{
       <BreadCrumbs path={path} />
 
     <div className='d-flex justify-content-between align-items-center mt-3'>
-      <h2>Records</h2>
+      <h2>Animals Records</h2>
      <Link to={"/admin/animal-records/add"}> <Button type="primary" icon={<PlusOutlined />} size='large'>
             Add
           </Button> </Link>

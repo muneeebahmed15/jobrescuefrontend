@@ -14,8 +14,9 @@ export const AddRecord = () =>{
             animalGender:  "",
             animalAge: "",
             microchip:  "",
-            matchBox: "",
+            freezeMark: "",
             ageNotes: "",
+            animalYear: "",
             animalNotes: "",
         
             //care record
