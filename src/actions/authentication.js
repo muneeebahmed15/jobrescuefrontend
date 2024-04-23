@@ -19,7 +19,7 @@ export const UserLogin = () => {
     const login = async() =>{
         setLoading(true);
         try {
-            const res = await axios.post("login", data);
+            const res = await axios.post("https://rescuebackend.vercel.app/v1/rescue/login", data);
            
             if(res.status === 200){
                 setAuth(res.data)
@@ -49,7 +49,7 @@ export const CurrentUser = () =>{
     const currentuser = async() => {
         setLoading(true);
         try {
-            const res = await axios.get("current-user");
+            const res = await axios.get("https://rescuebackend.vercel.app/v1/rescue/current-user");
             // console.log(res);
         } catch (error) {
             console.log(error);
