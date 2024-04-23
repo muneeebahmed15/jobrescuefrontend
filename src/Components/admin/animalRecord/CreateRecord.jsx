@@ -109,14 +109,14 @@ const CreateRecord = () => {
           
           <InputField label={"Next Vaccination Due"} type={"date"} placeholder={"Next Vaccination Due"} name={"nextVaccination"} value={data.nextVaccination} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} from={"col-3"}/>
+          <InputField label={"Vaccination Serial #"} type={"number"} placeholder={"Vaccination Serial #"} name={"vaccinationSerial"} value={data.vaccinationSerial} onChange={handleChange} from={"col-3"}/>
           
           {/* rabies */}
           <InputField label={"Add Rabies"} type={"date"} placeholder={"Add Rabies"} name={"addRabies"} value={data.addRabies} onChange={handleChange} from={"col-3"}/>
 
           <InputField label={"Next Rabies Due"} type={"date"} placeholder={"Next Rabies Due"} name={"nextRabies"} value={data.nextRabies} onChange={handleChange} from={"col-3"}/>
           
-          <InputField label={"Vaccination Serial #"} type={"date"} placeholder={"Vaccination Serial #"} name={"rabiesSerial"} value={data.rabiesSerial} onChange={handleChange} from={"col-3"}/>
+          <InputField label={"Vaccination Serial #"} type={"number"} placeholder={"Vaccination Serial #"} name={"rabiesSerial"} value={data.rabiesSerial} onChange={handleChange} from={"col-3"}/>
 
           {/* farrier */}
           <InputField label={"Farrier"} type={"date"} placeholder={"Farrier"} name={"farrier"} value={data.farrier} onChange={handleChange} from={"col-3"}/>
