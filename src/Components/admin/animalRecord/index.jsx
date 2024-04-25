@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import BreadCrumbs from '../../../UI/BreadCrumbs';
 import { formatCreatedAtDate } from '../../../UI/DateFormater';
 import { AllAnimals } from '../../../actions/addAnimal';
+import RecordDetail from './RecordDetail';
 
 const AnimalRecord = () => {
   const path = useLocation().pathname;
@@ -61,7 +62,7 @@ useEffect(()=>{
             
             <div className='d-flex flex-column'>
               <label className='text-secondary'>Age</label>
-              <b>{x.animalAge}</b>
+              <b>{formatCreatedAtDate(x.animalAge)}</b>
             </div>
 
             <div className='d-flex flex-column'>
@@ -79,11 +80,12 @@ useEffect(()=>{
               <b>{x.adoptionDate && formatCreatedAtDate(x?.adoptionDate?.slice(0,10))}</b>
             </div>
             
-          <Link to={`/admin/animal-records/detail/${x.id}`}> <Button>View Details</Button></Link>
+          <Link to={`/admin/animal-records/detail/${x._id}`}> <Button>View Details</Button></Link>
 
           </div>
       </Card>
       ))}
+
     
     </>
   )

@@ -96,7 +96,7 @@ export const AddRecord = () =>{
             adopterCity:  "" ,
             aopterState:   "",
             adopterZip:   "",
-            // adopterSource: [],
+            adopterSource: "",
             
             brandInspection:  "" ,
             halterColor:  "" ,
@@ -159,4 +159,73 @@ export const AllAnimals = () =>{
     }, [authToken]);
 
     return {data, loading}
+}
+
+export const SingleAnimal = (id) =>{
+    const {auth} = _AuthContext();
+    const authToken = auth && auth?.token;
+
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState({});
+
+    const singleanimal = async() =>{
+        setLoading(true)
+    try {
+        const res = await axios.get(`single-animal/${id}`)
+        setData(res.data.record);
+    } catch (error) {
+        console.log(error);
+    } finally{
+        setLoading(false);
+    }
+    }
+
+    useEffect(()=>{
+        if(authToken){
+            singleanimal();
+        }
+    },[authToken])
+
+    return {loading, data, singleanimal}
+}
+
+export const UpdateAnimal = (id) =>{
+
+    const [loading, setLoading] = useState(false);
+    const [updation, setUpdation] = useState(false);
+    // const [data, setData] = useState({});
+    const [updatedData, setUpdatedData] = useState();
+    const [from, setFrom] = useState("empDet");
+
+
+    const changeHandler = (e) =>{
+        setUpdatedData(prev => ({...prev, [e.target.name] : e.target.value}))
+    }
+
+    const magic =() =>{
+        setFrom("updation");
+        setUpdation(true);
+    }
+
+    // console.log(id);
+
+    const updateAnimal = async() =>{
+        setLoading(true)
+    try {
+        const res = await axios.put(`update-animal/${id}`, updatedData)
+        // setData(res.data.record);
+        console.log(res);
+        if(res.status === 200){
+            toast.success("Data updated successfully")
+            SingleAnimal(id);
+        }
+    } catch (error) {
+        console.log(error);
+    } finally{
+        setLoading(false);
+    }
+    }
+
+
+    return {loading, updation, from, setUpdatedData, updateAnimal, setUpdation, updatedData, magic, changeHandler}
 }

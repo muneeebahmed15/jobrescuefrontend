@@ -65,27 +65,6 @@ const CreateRecord = () => {
           </div>
 
           <InputField label={"Animal Age"} type={"date"} placeholder={"Animal Age"} name={"animalAge"} value={data.camperAge} onChange={handleChange} />
-          
-          {/* <div className="col-md-6 rightSpace mt-2">
-          <label className='form-label'>Animal Gender</label> <br />
-          <select className='form-select' name='animalYear'
-           value={data.animalYear} onChange={handleChange}>
-           <option defaultValue>Choose Birth Year</option>
-           <option value="2024">2024</option>
-           <option value="2023">2023</option>
-           <option value="2022">2022</option>
-           <option value="2021">2021</option>
-           <option value="2020">2020</option>
-           <option value="2019">2019</option>
-           <option value="2018">2018</option>
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
-          </select>
-          </div> */}
 
           <InputField label={"Animal Birth Year"} type={"number"} placeholder={"Animal Birth Year"} name={"animalYear"} value={data.animalYear} onChange={handleChange} />
           
@@ -101,20 +80,6 @@ const CreateRecord = () => {
           <Input size='large' type='text' placeholder='Notes' name="animalNotes" value={data.animalNotes} onChange={handleChange} />
         </div>
           </div>
-
-         {/*
-
-        <div className="col-md-6 rightSpace mt-2">
-        <label className='form-label'>Herd Management Area</label>
-          <Input size='large' type='text' placeholder='Freeze Mark' name="freezeMark" value={""} onChange={handleChange} />
-        </div>
-
-        <div className="col-md-6 rightSpace mt-2">
-        <label className='form-label'>Gather Date</label>
-          <Input size='large' type='date' placeholder='Gather Date' name="gatherDate" value={""} onChange={handleChange} />
-        </div>
-        </div>
-          }  */}
 
           </Card>
         </>
@@ -357,61 +322,6 @@ const CreateRecord = () => {
         </>
       ),
     },
-    // {
-    //   title: "Section 4",
-    //   content: (
-    //     <>
-    //     <Card>
-
-    //           <div className="row">
-    //          <h3>Training Tasks</h3>
-
-       
-    //          <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Touch/Take Reward</label>
-    //         <Input size='large' type='text' placeholder='Reward' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Brush/Groom</label>
-    //         <Input size='large' type='text' placeholder='Brush/Groom' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Halter</label>
-    //         <Input size='large' type='text' placeholder='Healer' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Lead Rope On</label>
-    //         <Input size='large' type='text' placeholder='Lead Rope On' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Lead in Small Area</label>
-    //         <Input size='large' type='text' placeholder='Lead in Small Area' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Tie to Post</label>
-    //         <Input size='large' type='text' placeholder='Tie to Post' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Lead in Larger Area</label>
-    //         <Input size='large' type='text' placeholder='Lead in Large Area' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       <div className="col-md-6 rightSpace mt-2">
-    //       <label className='form-label'>Lead in Pasture/breezeway</label>
-    //         <Input size='large' type='text' placeholder='Lead in Pasture/breezeway' name="" value={""} onChange={handleChange} />
-    //       </div>
-
-    //       </div>
-    //       </Card>
-    //     </>
-    //   ),
-    // },
     {
       title: "Section 4",
       content: (
@@ -517,7 +427,7 @@ const CreateRecord = () => {
 
           <div className="col-md-6 rightSpace mt-2">
           <label className='form-label'>Source of Adopter</label>
-          <select className='form-select'>
+          <select className='form-select' name='adopterSource' value={data.adopterSource}>
           <option defaultValue>Choose Source of Adopter</option>
           <option value="Referral">Referral</option>
           <option value="Facebook">Facebook</option>
