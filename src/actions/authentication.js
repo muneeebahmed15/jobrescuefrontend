@@ -82,24 +82,45 @@ export const RegisterStaff = () => {
         role:"",
         otherRole:"",
         availability: [""],
-        photo: "",
+        file: null,
         password: "",
         notes: ""
     });
 
     // console.log(data);
 
-    const changeHandler = (e) =>{
-        setData({...data, [e.target.name]: e.target.value})
+    const fileHandler = (e) =>{
+        setData({...setData, file: e.target.files[0]});
     }
+
+    const changeHandler = (e) =>{
+        setData({...data, [e.target.name]: e.target.value});
+    }
+
     const checkHandler = (checkedValues) => {
         setData({ ...data, availability: checkedValues });
-      };
+    }
 
     const register = async() =>{
         setLoading(true);
         try {
-            const res = await axios.post("/register-user", data);
+            const formData = new FormData();
+            formData.append('firstName', data.firstName);
+            formData.append('lastName', data.lastName);
+            formData.append('email', data.email);
+            formData.append('phone', data.phone);
+            formData.append('address', data.address);
+            formData.append('DOB', data.DOB);
+            formData.append('emergencyContactName', data.emergencyContactName);
+            formData.append('emergencyContactNumber', data.emergencyContactNumber);
+            formData.append('role', data.role);
+            formData.append('otherRole', data.otherRole);
+            formData.append('availability', JSON.stringify(data.availability));
+            formData.append('file', data.file);
+            formData.append('password', data.password);
+            formData.append('notes', data.notes);
+
+            const res = await axios.post("/register-user", formData);
             console.log(res);
            if(res.status === 200){
             toast.success("Staff added successfully");
@@ -122,14 +143,14 @@ export const RegisterStaff = () => {
             router("/admin/employees")
            }
         } catch (error) {
-            if(error.response.status === 400){toast.error("Email already exists")}
+            // if(error.response.status === 400){toast.error("Email already exists")}
             console.log(error);
         }finally{
             setLoading(false);
         }
     }
 
-    return { register, data, checkHandler, loading, changeHandler }
+    return { register, data, checkHandler, fileHandler, loading, changeHandler }
 }
 
 export const GetUsers = () => {
@@ -142,7 +163,7 @@ export const GetUsers = () => {
     setLoading(true);
     try {
       const {data} = await axios.get("get-users")
-      setUsers(data);
+      setUsers(data.data);
     } catch (error) {
       console.log(error);
     } finally {

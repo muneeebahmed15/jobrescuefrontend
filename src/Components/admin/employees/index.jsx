@@ -54,7 +54,9 @@ useEffect(()=>{
       <Card key={x._id}>
           <div className='d-flex justify-content-between align-items-center'>
             <div>
-            <Avatar size={64} icon={<UserOutlined />} style={{marginRight: "20px"}}/>
+        {x.photo ? <img src={`http://localhost:5000${x.photo}`} className='rounded-circle' style={{marginRight: "20px", width:"60px", height: "60px"}}/> : 
+        <Avatar icon=<UserOutlined/> size={60}/>
+        }
             <b>{`${x.firstName} ${x.lastName}`}</b>
             </div>
 

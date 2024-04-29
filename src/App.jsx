@@ -12,6 +12,7 @@ import RecordDetail from './Components/admin/animalRecord/RecordDetail'
 import AddEmployee from './Components/admin/employees/AddEmployee'
 import Admin from './Components/admin'
 import EmployeeDetail from './Components/admin/employees/EmployeeDetail'
+import Picture from './Components/picture'
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
     <BrowserRouter>
 
     <Routes>
+              
+            <Route path='/picture' element={<Picture/>}/>
 
             <Route path='/' element={<LandingPage/>}/>
 

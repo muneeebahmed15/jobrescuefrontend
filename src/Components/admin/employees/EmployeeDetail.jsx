@@ -2,7 +2,7 @@ import React from 'react'
 import { DeleteUser, SingleUser } from '../../../actions/authentication';
 import { Link, useParams } from 'react-router-dom';
 import InputField from '../../../UI/InputField';
-import { Button, Card } from 'antd';
+import { Button, Card, Image } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { formatCreatedAtDate } from '../../../UI/DateFormater';
 
@@ -22,6 +22,14 @@ const EmployeeDetail = () => {
         <Card>
           {loading ? "loading..." : 
       <div className='row'>
+
+      <div className='col-12 d-flex justify-content-end my-3'> {data.photo && <Image
+                width={250}
+                height={200}
+               src={`http://localhost:5000/${data?.photo}`}
+              />}
+              </div>
+              
             <InputField label={"Name"} value={`${data.firstName} ${data.lastName} `} readOnly from={"empDet"}/>
             
             {/* <InputField label={"Last Name"} value={data.lastName} readOnly from={"empDet"}/> */}

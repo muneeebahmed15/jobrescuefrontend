@@ -12,7 +12,7 @@ const plainOptions = ['Sunday', 'Monday', 'Tuesday','Wednesday', 'Thursday', 'Fr
 const {TextArea} = Input;
 
 const AddEmployee = () => {
-  const {data, loading, checkHandler, changeHandler, register} = RegisterStaff();
+  const {data, loading, checkHandler, fileHandler, changeHandler, register} = RegisterStaff();
 
   return (
     <>
@@ -43,7 +43,7 @@ const AddEmployee = () => {
               <div className="col-md-6 px-2 mt-2">
                 <label className='form-label'>Role</label>
               <select className='form-select' name='role' value={data.role} onChange={changeHandler} size='large' >
-                <option defaultValue>Choose Role</option>
+                <option selected>Choose Role</option>
                 <option value="Volunteer">Volunteer</option>
                 <option value="Board Member">Board Member</option>
                 <option value="Other">Other</option>
@@ -59,7 +59,7 @@ const AddEmployee = () => {
           <CheckboxGroup options={plainOptions}  defaultValue={data.availability} onChange={checkHandler} />
               </div>
 
-            <InputField label={"Photo"} placeholder={""} type={"file"} name={"photo"} value={data.photo} onChange={changeHandler}/>
+            <InputField label={"Photo"} placeholder={""} type={"file"} name={"file"}  onChange={fileHandler}/>
             
             <InputField label={"Password"} placeholder={"Password"} type={"password"} name={"password"} value={data.password} onChange={changeHandler}/>
 
