@@ -19,7 +19,7 @@ export const UserLogin = () => {
     const login = async() =>{
         setLoading(true);
         try {
-            const res = await axios.post("login", data);
+            const res = await axios.post("https://rescuebackend.vercel.app/v1/rescue/login", data);
            
             if(res.status === 200){
                 setAuth(res.data)
