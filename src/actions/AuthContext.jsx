@@ -18,8 +18,8 @@ const AuthProvider = ({children}) => {
       }
     },[])
 
-    //        https://rescuebackend.vercel.app/v1/rescue      
-    axios.defaults.baseURL = "http://localhost:5000/v1/rescue";
+    //            http://localhost:5000/v1/rescue
+    axios.defaults.baseURL = "https://rescue-three.vercel.app/v1/rescue";
     axios.defaults.headers.common["Cookies"] = auth.token;
 
   return <AuthContext.Provider value={{auth, setAuth}}>{children}</AuthContext.Provider>
