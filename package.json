@@ -33,7 +33,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://rescuebackend.vercel.app/",
+      "target": "https://rescue-three.vercel.app/v1/rescue",
       "changeOrigin": true,
       "secure": false
     }
