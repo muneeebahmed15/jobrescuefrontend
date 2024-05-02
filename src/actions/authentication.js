@@ -33,6 +33,7 @@ export const UserLogin = () => {
       const response = await fetch(
         "https://rescue-three.vercel.app/v1/rescue/login",
         {
+          mode: "no-cors",
           method: "POST", // Specify the HTTP method (e.g., POST, GET, PUT, DELETE)
           headers: {
             "Content-Type": "application/json",
