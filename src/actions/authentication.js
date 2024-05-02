@@ -2,158 +2,197 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { _AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
-import toast from 'react-hot-toast'
-
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 export const UserLogin = () => {
-    const [data, setData] = useState({email: "", password: ""});
-    const {auth, setAuth} = _AuthContext();
-    const [loading, setLoading] = useState(false);
-    const router = useNavigate();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const { auth, setAuth } = _AuthContext();
+  const [loading, setLoading] = useState(false);
+  const router = useNavigate();
 
-    const changeHandler = (e) =>{
-        setData({...data, [e.target.name]: e.target.value})
-    }
+  const changeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-    const login = async() =>{
-        setLoading(true);
-        try {
-            const res = await axios.post("login", data);
-           
-            if(res.status === 200){
-                setAuth(res.data)
-                router("/admin/dashboard")
-                Cookies.set("auth",JSON.stringify(res.data))
-                toast.success("Login Successful")
-            }
-        } catch (error) {
-            console.log(error);
-        }finally{
-            setLoading(false);
+  const login = async () => {
+    setLoading(true);
+    try {
+      // const res = await axios.post("login", data);
+
+      // if(res.status === 200){
+      //     setAuth(res.data)
+      //     router("/admin/dashboard")
+      //     Cookies.set("auth",JSON.stringify(res.data))
+      //     toast.success("Login Successful")
+      // }
+
+      const response = await fetch(
+        "https://rescue-three.vercel.app/v1/rescue/login",
+        {
+          method: "POST", // Specify the HTTP method (e.g., POST, GET, PUT, DELETE)
+          headers: {
+            "Content-Type": "application/json",
+            //   'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+            // Add other custom headers as needed
+          },
+          body: JSON.stringify(data), // Convert request body to JSON string
         }
+      );
+
+      console.log(response);
+      //   if (!response.ok) {
+      //     throw new Error('Network response was not ok');
+      //   }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const logout = () =>{
-        Cookies.remove("auth");
-        setAuth({token: "", user: ""})
-        router("/login");
+  const logout = () => {
+    Cookies.remove("auth");
+    setAuth({ token: "", user: "" });
+    router("/login");
+  };
+  return { login, data, loading, changeHandler, logout };
+};
+
+export const CurrentUser = () => {
+  const [data, setData] = useState({});
+  const { auth } = _AuthContext();
+  const AuthToken = auth && auth?.token;
+  const [loading, setLoading] = useState(false);
+
+  const currentuser = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("current-user");
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    return { login, data, loading, changeHandler, logout }
-}
+  };
 
-export const CurrentUser = () =>{
-    const [data, setData] = useState({});
-    const {auth} = _AuthContext();
-    const AuthToken = auth && auth?.token;
-    const [loading, setLoading] = useState(false);
-
-    const currentuser = async() => {
-        setLoading(true);
-        try {
-            const res = await axios.get("current-user");
-            // console.log(res);
-        } catch (error) {
-            console.log(error);
-        }finally{
-            setLoading(false);
-        }
+  useEffect(() => {
+    if (AuthToken) {
+      currentuser();
     }
+  }, [AuthToken]);
 
-    useEffect(()=>{
-        if(AuthToken){
-            currentuser()
-        }
-    },[AuthToken])
-
-    return {currentuser, data, loading}
-}
+  return { currentuser, data, loading };
+};
 
 export const RegisterStaff = () => {
-    const [loading, setLoading] = useState(false);
-    const router = useNavigate();
-    const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        DOB: "",
-        emergencyContactName: "",
-        emergencyContactNumber: "",
-        role:"",
-        otherRole:"",
-        availability: [""],
-        file: null,
-        password: "",
-        notes: ""
-    });
+  const [loading, setLoading] = useState(false);
+  const router = useNavigate();
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    DOB: "",
+    emergencyContactName: "",
+    emergencyContactNumber: "",
+    role: "",
+    otherRole: "",
+    availability: [""],
+    file: null,
+    password: "",
+    notes: "",
+  });
 
-    // console.log(data);
+  // console.log(data);
 
-    const fileHandler = (e) =>{
-        setData({...setData, file: e.target.files[0]});
+  const fileHandler = (e) => {
+    setData({ ...setData, file: e.target.files[0] });
+  };
+
+  const changeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const checkHandler = (checkedValues) => {
+    setData({ ...data, availability: checkedValues });
+  };
+
+  const register = async () => {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("firstName", data.firstName);
+      formData.append("lastName", data.lastName);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("address", data.address);
+      formData.append("DOB", data.DOB);
+      formData.append(
+        "emergencyContactName",
+        data.emergencyContactName
+      );
+      formData.append(
+        "emergencyContactNumber",
+        data.emergencyContactNumber
+      );
+      formData.append("role", data.role);
+      formData.append("otherRole", data.otherRole);
+      formData.append(
+        "availability",
+        JSON.stringify(data.availability)
+      );
+      formData.append("file", data.file);
+      formData.append("password", data.password);
+      formData.append("notes", data.notes);
+
+      const res = await axios.post(
+        "/register-user",
+        formData
+      );
+      console.log(res);
+      if (res.status === 200) {
+        toast.success("Staff added successfully");
+        setData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          address: "",
+          DOB: "",
+          emergencyContactName: "",
+          emergencyContactNumber: "",
+          role: "",
+          otherRole: "",
+          availability: [""],
+          photo: "",
+          password: "",
+          notes: "",
+        });
+        router("/admin/employees");
+      }
+    } catch (error) {
+      // if(error.response.status === 400){toast.error("Email already exists")}
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const changeHandler = (e) =>{
-        setData({...data, [e.target.name]: e.target.value});
-    }
-
-    const checkHandler = (checkedValues) => {
-        setData({ ...data, availability: checkedValues });
-    }
-
-    const register = async() =>{
-        setLoading(true);
-        try {
-            const formData = new FormData();
-            formData.append('firstName', data.firstName);
-            formData.append('lastName', data.lastName);
-            formData.append('email', data.email);
-            formData.append('phone', data.phone);
-            formData.append('address', data.address);
-            formData.append('DOB', data.DOB);
-            formData.append('emergencyContactName', data.emergencyContactName);
-            formData.append('emergencyContactNumber', data.emergencyContactNumber);
-            formData.append('role', data.role);
-            formData.append('otherRole', data.otherRole);
-            formData.append('availability', JSON.stringify(data.availability));
-            formData.append('file', data.file);
-            formData.append('password', data.password);
-            formData.append('notes', data.notes);
-
-            const res = await axios.post("/register-user", formData);
-            console.log(res);
-           if(res.status === 200){
-            toast.success("Staff added successfully");
-            setData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                phone: "",
-                address: "",
-                DOB: "",
-                emergencyContactName: "",
-                emergencyContactNumber: "",
-                role:"",
-                otherRole:"",
-                availability: [""],
-                photo: "",
-                password: "",
-                notes: ""
-            });
-            router("/admin/employees")
-           }
-        } catch (error) {
-            // if(error.response.status === 400){toast.error("Email already exists")}
-            console.log(error);
-        }finally{
-            setLoading(false);
-        }
-    }
-
-    return { register, data, checkHandler, fileHandler, loading, changeHandler }
-}
+  return {
+    register,
+    data,
+    checkHandler,
+    fileHandler,
+    loading,
+    changeHandler,
+  };
+};
 
 export const GetUsers = () => {
   const [users, setUsers] = useState([]);
@@ -164,7 +203,7 @@ export const GetUsers = () => {
   const getusers = async () => {
     setLoading(true);
     try {
-      const {data} = await axios.get("get-users")
+      const { data } = await axios.get("get-users");
       setUsers(data.data);
     } catch (error) {
       console.log(error);
@@ -173,7 +212,7 @@ export const GetUsers = () => {
     }
   };
 
-//   console.log(users);
+  //   console.log(users);
 
   useEffect(() => {
     if (AuthToken) {
@@ -181,60 +220,56 @@ export const GetUsers = () => {
     }
   }, [AuthToken]);
 
-
   return { users, loading };
 };
 
-export const SingleUser = (id) =>{
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState({});
-    const router = useNavigate()
+export const SingleUser = (id) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
+  const router = useNavigate();
 
-    const singleUser = async() =>{
-        setLoading(true);
-        try {
-            const res = await axios.get(`single-user/${id}`);
-            const {data} = res;
-            if(res.status === 200){
-                setData(data)
-            }
-        } catch (error) {
-            console.log(error);
-        }finally{
-            setLoading(false);
-        }
+  const singleUser = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`single-user/${id}`);
+      const { data } = res;
+      if (res.status === 200) {
+        setData(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(()=>{
-        if(id)
-        singleUser();
-    },[id])
+  useEffect(() => {
+    if (id) singleUser();
+  }, [id]);
 
-    return { loading, data}
-}
+  return { loading, data };
+};
 
+export const DeleteUser = () => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
+  const router = useNavigate();
 
-export const DeleteUser = () =>{
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState({});
-    const router = useNavigate()
-
-    const deleteUser = async(id) =>{
-        setLoading(true);
-        try {
-            const res = await axios.get(`single-user/${id}`);
-            const {data} = res;
-            if(res.status === 200){
-                toast.success("Staff Deleted Successfully");
-                router("/admin/employees");
-            }
-        } catch (error) {
-            console.log(error);
-        }finally{
-            setLoading(false);
-        }
+  const deleteUser = async (id) => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`single-user/${id}`);
+      const { data } = res;
+      if (res.status === 200) {
+        toast.success("Staff Deleted Successfully");
+        router("/admin/employees");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return { loading, deleteUser }
-}
-
+  return { loading, deleteUser };
+};
